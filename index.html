@@ -2,89 +2,82 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>3d效果</title>
-		<style type="text/css">
-			#box{
-				perspective: 800px;
-				perspective-origin: 50% 50%;
-				overflow: hidden;
-			}
-			.box{
-				width: 400px;
-				height: 400px;
-				position: relative;
-				margin: 0 auto;/*居中*/
-				padding-top: 170px;
-				transform-style: preserve-3d;
-			}
-			.box div{/*.box div是包含的意思,即此句等同于下面的#d1,#d2,#d3,#d4,#d5,#d6,#d7*/
-				width: 360px;
-				height: 360px;
-				padding: 20px;
-				background: black;
-				font-weight: bold;
-				font-size: 360px;
-				line-height: 360px;
-				text-align: center;
-				color: white;
-				position: absolute;
-			}
-			/*#d1,#d2,#d3,#d4,#d5,#d6#,d7{
-				height: 500px;
+		<title>轮播图+圆角+翻转</title>
+		<style type="text/css">\
+		*{margin: 0;padding: 0;}/*星号表示全局的意思*/
+			div{
 				width: 500px;
-				font-family: "微软雅黑";
-				font-size: 350px;
-				background: cornflowerblue;
-				text-align: center;
-				position: absolute;
-				line-height: 400px;行高，与子高度一样
-			}*/
-			#d1{
-				transform-origin: bottom;
-				/*过渡*/
-				transition:all 1s linear;
+				height: 300px;
+				overflow:hidden;
+				margin: 0 auto;
+				border-radius: 250px;/*圆角*/
+				}
+			ul{
+				width: 2500px;
+				height: 300px;
+				animation: v 5s infinite;/*动画，5s移动完,infinite是循环*/
+				position: relative;/*相对定位(以本身位置移动)绝对定位(以父位置移动)*/
 			}
-			#d2,#d3,#d4,#d5,#d6,#d7{
-				transform-origin: bottom;
-				transition:all 1s linear;
-				transform: rotateX(90deg);
-		}
-		.a{
-			text-align: center;
-			margin: 20px auto;
-		}
+			ul li{
+				list-style: none;
+				float: left;
+			}
+			img{
+				width: 500px;
+				height: 300px;
+			}
+			@keyframes v{/*v动画方法*/
+				0%{left: 0px;}
+				20%{left: -500px;}/*负数表示往上和往右*/
+				40%{left: -1000px;}
+				60%{left: -1500px;}
+				80%{left: -2000px;}
+				100%{left: 0px;}
+			}
+			p{
+				height: 50px;
+				width: 500px;
+				margin: 0 auto;
+				text-align: center;
+				background: #007AFF;
+				font-size: 30px;
+				text-shadow: 2px 2px 3px yellow;/*文本阴影 水平 垂直 模糊度 扩散度 颜色*/
+				box-shadow: 0px 0px 6px 4px black;/*盒子阴影,往外扩散4像素*/
+				box-shadow: inset 0px 0px 4px 3px red;/*内阴影，两个属性一样，会覆盖*/
+			}
+			h1{
+				height: 1000px;
+			}
+			a{
+				font-size: 100px;
+			}
+			h2{
+				text-align: center;
+			}
+			.img{
+				display: block;
+				margin: 0 auto;
+				transition: all 1s;/*transition过渡  1秒内转换*/
+			}
+			h1:hover+.img{/*+号表示h1的兄弟，紧挨着的第一个元素,就是鼠标放上h1后，图片翻转（另外。img：hover则表示鼠标放在图片上才翻转）*/
+				transform: rotateY(180deg);
+			}
 		</style>
-		<script type="text/javascript">//脚本函数
-		var i=1;
-		function q(){//向前
-			if(i==7) return;
-			document.getElementById("d"+i).style.transform="rotateX(-90deg)";
-			i++;
-			document.getElementById("d"+i).style.transform="rotateX(0deg)";
-		}
-		function h(){//向后
-			if(i==1) return;
-			document.getElementById("d"+i).style.transform="rotateX(90deg)";
-			i--;
-			document.getElementById("d"+i).style.transform="rotateX(0deg)";
-		}
-		</script>
 	</head>
 	<body>
-		<div id="box">
-			<div class="box">
-				<div id="d1">1</div>
-				<div id="d2">2</div>
-				<div id="d3">3</div>
-				<div id="d4">4</div>
-				<div id="d5">5</div>
-				<div id="d6">6</div>
-				<div id="d7">7</div>
-			</div>
+		<!--同一个页面里面，id只能唯一命名，class名可以起相同的名-->
+		<div id="a">
+			<ul class="a">
+				<li><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/3.jpg"/></li>
+				<li><img src="img/4.jpg"/></li>
+				<li><img src="img/5.jpg"/></li>
+			</ul>
 		</div>
-		<!--按钮-->
-		<div class="a">
-			<a href="javascript:q()">向前</a>&nbsp;&nbsp;&nbsp;<a href="javascript:h()">向后</a>
-		</div>
+		<p>真相只有一个！</p>
+		<h1></h1>
+		<img class="img" src="img/8.jpg"/>
+		<h2><a href="#a">轮播图</a></h2>
 	</body>
 </html>
