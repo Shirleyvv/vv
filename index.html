@@ -2,89 +2,65 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>3d效果</title>
+		<title></title>
 		<style type="text/css">
-			#box{
-				perspective: 800px;
-				perspective-origin: 50% 50%;
-				overflow: hidden;
-			}
-			.box{
-				width: 400px;
-				height: 400px;
+			ul li{
+				list-style: none;/*列表样式*/
+				float: left;/*不浮动的话是纵向菜单*/
+				width: 80px;
+				height: 50px;
+				background: dodgerblue;
+				text-align: center;
+				line-height: 50px;
+				font-family: "黑体";
+				color: black;
 				position: relative;
-				margin: 0 auto;/*居中*/
-				padding-top: 170px;
-				transform-style: preserve-3d;
+				margin-right: 35px;
 			}
-			.box div{/*.box div是包含的意思,即此句等同于下面的#d1,#d2,#d3,#d4,#d5,#d6,#d7*/
-				width: 360px;
-				height: 360px;
-				padding: 20px;
-				background: black;
-				font-weight: bold;
-				font-size: 360px;
-				line-height: 360px;
-				text-align: center;
-				color: white;
+			ul li::before{
 				position: absolute;
-			}
-			/*#d1,#d2,#d3,#d4,#d5,#d6#,d7{
-				height: 500px;
-				width: 500px;
-				font-family: "微软雅黑";
-				font-size: 350px;
-				background: cornflowerblue;
-				text-align: center;
+				content: "";
+				display: block;/*块节元素*/
+				width: 20px;
+				height: 50px;
+				background: lightgoldenrodyellow;
+				left: -20px;
+				top: 0;
+			}/*在元素前加内容*/
+			ul li::after{
 				position: absolute;
-				line-height: 400px;行高，与子高度一样
-			}*/
-			#d1{
-				transform-origin: bottom;
-				/*过渡*/
-				transition:all 1s linear;
+				content: "";
+				display: block;
+				width: 20px;
+				height: 50px;
+				background: lightgoldenrodyellow;
+				right: -20px;
+				top: 0;/*顶部对齐*/
+			}/*在元素后加内容*/
+			ul li:hover{
+				margin-top: -10px;/*负值往上走,正值往下走*/
+				box-shadow: 0px 2px 5px black;/*盒子阴影*/
 			}
-			#d2,#d3,#d4,#d5,#d6,#d7{
-				transform-origin: bottom;
-				transition:all 1s linear;
-				transform: rotateX(90deg);
-		}
-		.a{
-			text-align: center;
-			margin: 20px auto;
-		}
+			li:hover:before{
+				transition: all .2s;/*过渡，0.2秒,代码里面0可以省略*/
+				transform: rotate(-30deg) skew(-30deg) translate(2px,9px);
+				/*rotate旋转30度，skew倾斜30度，translate是移动,左右移动1.5像素，上下移动9像素*/
+				height: 86% ;/*上浮86*/
+			}
+			li:hover:after{
+				transition: all .2s;
+				transform: rotate(30deg) skew(30deg) translate(-2px,9px);
+				height: 86%;
+			}
 		</style>
-		<script type="text/javascript">//脚本函数
-		var i=1;
-		function q(){//向前
-			if(i==7) return;
-			document.getElementById("d"+i).style.transform="rotateX(-90deg)";
-			i++;
-			document.getElementById("d"+i).style.transform="rotateX(0deg)";
-		}
-		function h(){//向后
-			if(i==1) return;
-			document.getElementById("d"+i).style.transform="rotateX(90deg)";
-			i--;
-			document.getElementById("d"+i).style.transform="rotateX(0deg)";
-		}
-		</script>
 	</head>
 	<body>
-		<div id="box">
-			<div class="box">
-				<div id="d1">1</div>
-				<div id="d2">2</div>
-				<div id="d3">3</div>
-				<div id="d4">4</div>
-				<div id="d5">5</div>
-				<div id="d6">6</div>
-				<div id="d7">7</div>
-			</div>
-		</div>
-		<!--按钮-->
-		<div class="a">
-			<a href="javascript:q()">向前</a>&nbsp;&nbsp;&nbsp;<a href="javascript:h()">向后</a>
-		</div>
 	</body>
+	<ul>
+		<li><a href="transform.html">3D翻转效果</a></li>
+		<li><a href="cycle.html">圆角轮播图</a></li>
+		<li><a href="submenu.html">子菜单</a></li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
 </html>
